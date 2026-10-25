@@ -31,15 +31,12 @@ h2{font-size:1.6rem;font-weight:700;margin-bottom:1.5rem}
 .jobs li{padding-left:1.1rem;border-left:4px solid var(--accent)}
 .jobs b{display:block;font-size:1.15rem}
 .jobs span{color:var(--sub)}
-.likes{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-.likes figure .ph{aspect-ratio:4/3;border-radius:12px}
+.likes{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.likes figure .ph,.likes iframe{aspect-ratio:3/4;border-radius:12px}
+.likes iframe{display:block;width:100%;border:1px solid var(--line);background:var(--surface)}
 .likes figcaption{margin-top:.6rem;font-weight:500}
-.insta{margin-top:2rem;display:grid;grid-template-columns:1fr minmax(280px,420px);gap:1.5rem;align-items:center}
-.insta h3{font-size:1.2rem;margin-bottom:.4rem}
-.insta p{color:var(--sub)}
-.btn{display:inline-block;margin-top:1rem;padding:.7rem 1.3rem;border-radius:99px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:700}
-.btn:hover{background:var(--accent);color:#fff}
-.insta iframe{width:100%;height:480px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.likes figcaption a{text-decoration:none}
+.likes figcaption a:hover{color:var(--accent)}
 .trips{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;align-items:start}
 .view{position:relative;overflow:hidden;aspect-ratio:4/3;border-radius:14px;touch-action:pan-y}
 .track{display:flex;height:100%;transition:transform .35s ease}
@@ -54,7 +51,7 @@ h2{font-size:1.6rem;font-weight:700;margin-bottom:1.5rem}
 .tbody h3 i{font-style:normal;display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--accent);color:#fff;font-size:.95rem}
 .tbody p{color:var(--sub)}
 footer{margin-top:5rem;padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--sub);font-size:.9rem}
-@media (max-width:820px){.work,.insta,.trips{grid-template-columns:1fr}.trips{gap:2.5rem}.insta iframe{height:440px}}
+@media (max-width:820px){.work,.trips{grid-template-columns:1fr}.trips{gap:2.5rem}.likes{grid-template-columns:1fr 1fr}.likes .ig{grid-column:1/-1}.likes iframe{aspect-ratio:auto;height:460px}}
 @media (max-width:520px){.likes{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.track{transition:none}html{scroll-behavior:auto}}
 </style>
@@ -87,14 +84,10 @@ footer{margin-top:5rem;padding:2rem 0 3rem;border-top:1px solid var(--line);colo
     <div class="likes">
       <figure><div class="ph"><img src="images/hobby-photo.jpg" alt="사진 취미" onerror="this.remove()"><span>사진 추가 예정</span></div><figcaption>사진</figcaption></figure>
       <figure><div class="ph"><img src="images/hobby-cook.jpg" alt="요리 취미" onerror="this.remove()"><span>사진 추가 예정</span></div><figcaption>요리</figcaption></figure>
-    </div>
-    <div class="insta">
-      <div>
-        <h3>찍은 사진은 인스타그램에서 볼 수 있어요</h3>
-        <p>@such_a_nlee</p>
-        <a class="btn" href="https://www.instagram.com/such_a_nlee/" target="_blank" rel="noopener">인스타그램 열기</a>
-      </div>
-      <iframe src="https://www.instagram.com/such_a_nlee/embed" title="인스타그램 such_a_nlee" loading="lazy" scrolling="no"></iframe>
+      <figure class="ig">
+        <iframe src="https://www.instagram.com/such_a_nlee/embed" title="인스타그램 such_a_nlee" loading="lazy" scrolling="no"></iframe>
+        <figcaption><a href="https://www.instagram.com/such_a_nlee/" target="_blank" rel="noopener">인스타그램</a></figcaption>
+      </figure>
     </div>
   </section>
 
