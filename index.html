@@ -100,16 +100,27 @@ footer{margin-top:5rem;padding:2rem 0 3rem;border-top:1px solid var(--line);colo
 <footer><div class="wrap">© 이수찬</div></footer>
 
 <script>
-// 여행 사진은 images 폴더에 올린 뒤 파일 경로를 photos 배열에 추가하세요.
-// 예: photos: ['images/japan-1.jpg', 'images/japan-2.jpg']
+// 여행 사진은 images 폴더에 올린 뒤 이름(확장자 제외)을 photos 배열에 추가하세요.
+// 예: photos: ['images/japan-1', 'images/japan-2'] (jpg, jpeg, png 등은 자동으로 찾아요)
 const TRIPS = [
-  { no: 1, place: '일본', photos: [],
+  { no: 1, place: '일본', photos: ['images/japan-1'],
     text: '취업하고 처음으로 대학교 시절 친구들과 일본 여행을 갔어요! 제가 일본어를 좀 할 줄 알아서 가볍게 통역하면서 처음으로 오마카세도 먹어보고, 원하는 옷가게들 가서 쇼핑도 하고 즐거웠습니다!' },
-  { no: 2, place: '부산', photos: [],
+  { no: 2, place: '부산', photos: ['images/busan-1'],
     text: '부산은 여자친구랑 처음으로 여행을 간 곳이에요! 미쉐린 가이드 나왔던 국밥, 장어덮밥도 먹었고 광안리에서 유람선도 타보고, 즐거웠던 여행이었습니다 ㅎㅎ' },
-  { no: 3, place: '슬로바키아', photos: [],
+  { no: 3, place: '슬로바키아', photos: ['images/slovakia-1', 'images/slovakia-2', 'images/slovakia-3'],
     text: '여긴 사실 여행은 아니고 출장이었지만, 처음으로 유럽을 가 본 경험이어서 기억에 남았습니다! 넓게 뻗은 평원 사이에서 출퇴근 하는 경험과 점심에 매점에서 구워주는 피자를 먹는 경험, 주말에는 오스트리아로 잠시 여행을 다녀오며(물론 직장 동료분들과.....) 벨베데레 궁전도 가보고 슈테판 대성당도 가보고 행복했습니다!!' }
 ];
+
+const EXT = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG', 'webp'];
+function nextExt(im) {
+  const n = +im.dataset.n + 1;
+  if (n < EXT.length) { im.dataset.n = n; im.src = im.dataset.b + '.' + EXT[n]; }
+  else im.remove();
+}
+function imgTag(base, alt) {
+  if (/\.\w+$/.test(base)) return '<img src="' + base + '" alt="' + alt + '" onerror="this.remove()">';
+  return '<img src="' + base + '.jpg" data-b="' + base + '" data-n="0" alt="' + alt + '" onerror="nextExt(this)">';
+}
 
 const list = document.getElementById('tripList');
 TRIPS.forEach(t => {
@@ -118,7 +129,7 @@ TRIPS.forEach(t => {
   el.innerHTML =
     '<div class="view"><div class="track">' +
     slides.map(s => '<div class="slide ph">' +
-      (s ? '<img src="' + s + '" alt="' + t.place + ' 사진" onerror="this.remove()">' : '') +
+      (s ? imgTag(s, t.place + ' 사진') : '') +
       '<span>' + t.place + ' 사진을<br>추가해 주세요</span></div>').join('') +
     '</div>' +
     (slides.length > 1 ? '<button class="nav prev" aria-label="이전 사진">‹</button><button class="nav next" aria-label="다음 사진">›</button><div class="dots"></div>' : '') +
